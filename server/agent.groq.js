@@ -47,7 +47,7 @@ async function callGroq(messages, tools, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
       return await groq.chat.completions.create({
-        model: "llama3-groq-70b-8192-tool-use-preview",
+        model: "meta-llama/llama-4-scout-17b-16e-instruct",
         messages,
         tools,
         tool_choice: "auto",
