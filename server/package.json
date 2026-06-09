@@ -4,7 +4,9 @@
   "main": "index.js",
   "type":"module",
   "scripts": {
-    "test": "run dev"
+    "test": "run dev",
+    "dev":"nodemon index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
