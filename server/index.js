@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 
 const provider = process.env.AI_PROVIDER || "groq";
+const PORT = process.env.PORT || 5000;
 const { runAgent } = await import(
   provider === "gemini" ? "./agent.gemini.js" : "./agent.groq.js"
 );
@@ -34,6 +35,6 @@ app.post("/research", async (req, res) => {
   res.end();
 });
 
-app.listen(3001, () => {
-  console.log(`Agent server on :3001 — using ${provider}`);
+app.listen(PORT, () => {
+  console.log(`Agent server on :${PORT} — using ${provider}`);
 });
