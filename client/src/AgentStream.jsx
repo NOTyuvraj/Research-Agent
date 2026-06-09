@@ -80,8 +80,9 @@ export default function AgentStream({ events, running }) {
               style={{
                 marginTop: 16,
                 padding: "24px 28px",
-                background: "#fff",
-                border: "1px solid #e8e8e8",
+                background: "#fafafa",
+                border: "1px solid #ddd",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
                 borderRadius: 12,
                 fontSize: 15,
                 lineHeight: 1.8,

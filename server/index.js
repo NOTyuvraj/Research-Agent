@@ -36,7 +36,6 @@ app.post("/research", async (req, res) => {
   } finally {
     res.end();
   }
-  res.end();
 });
 
 app.listen(PORT, () => {
