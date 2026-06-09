@@ -9,7 +9,11 @@ const { runAgent } = await import(
 );
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://research-agent-client.vercel.app",
+  }),
+);
 app.use(express.json());
 
 app.post("/research", async (req, res) => {
@@ -28,7 +32,7 @@ app.post("/research", async (req, res) => {
   try {
     await runAgent(query, emit);
   } catch (err) {
-    emit({ type: "error", text: "Something went wrong. Try again." });
+    emit({ type: "error", text: err.message });
   } finally {
     res.end();
   }
