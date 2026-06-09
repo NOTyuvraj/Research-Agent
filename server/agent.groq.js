@@ -67,23 +67,16 @@ export async function runAgent(userQuery, emit) {
 
   while (true) {
     const response = await callGroq(messages, tools);
-
     const message = response.choices[0].message;
-
     const hasTools = message.tool_calls && message.tool_calls.length > 0;
 
-    if (hasTools && message.content) {
-      emit({
-        type: "thought",
-        text: message.content,
-      });
+    // emit thought always, not just when tools are called
+    if (message.content) {
+      emit({ type: "thought", text: message.content });
     }
 
     if (!hasTools) {
-      emit({
-        type: "final",
-        text: message.content,
-      });
+      emit({ type: "final", text: message.content });
       break;
     }
 
