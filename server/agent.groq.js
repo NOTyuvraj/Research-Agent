@@ -43,6 +43,22 @@ async function executeTool(name, args) {
   if (name === "scrape_url") return await scrapeURL(args.url);
 }
 
+async function callGroq(messages, tools, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await groq.chat.completions.create({
+        model: "llama3-groq-70b-8192-tool-use-preview",
+        messages,
+        tools,
+        tool_choice: "auto",
+      });
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+    }
+  }
+}
+
 export async function runAgent(userQuery, emit) {
   const messages = [
     { role: "system", content: SYSTEM_PROMPT },
@@ -50,12 +66,7 @@ export async function runAgent(userQuery, emit) {
   ];
 
   while (true) {
-    const response = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",  // better than 8b for tool use
-      messages,
-      tools,
-      tool_choice: "auto",
-    });
+    const response = await callGroq(messages, tools)
 
     const message = response.choices[0].message;
 
