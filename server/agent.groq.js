@@ -71,7 +71,7 @@ export async function runAgent(userQuery, emit) {
     const hasTools = message.tool_calls && message.tool_calls.length > 0;
 
     // emit thought always, not just when tools are called
-    if (message.content) {
+    if (message.content && hasTools) {
       emit({ type: "thought", text: message.content });
     }
 
