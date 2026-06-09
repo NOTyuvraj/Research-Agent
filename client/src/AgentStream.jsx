@@ -164,7 +164,7 @@ export default function AgentStream({ events, running }) {
                   code: ({ children }) => (
                     <code
                       style={{
-                        background: "#f3f3f3",
+                        background: "#222222",
                         padding: "2px 6px",
                         borderRadius: 4,
                         fontSize: 13,
