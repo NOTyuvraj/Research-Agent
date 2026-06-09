@@ -87,6 +87,7 @@ export default function AgentStream({ events, running }) {
                 fontSize: 15,
                 lineHeight: 1.8,
                 color: "#111",
+                textAlign:"left"
               }}
             >
               <ReactMarkdown
